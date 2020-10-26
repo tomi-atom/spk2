@@ -67,7 +67,7 @@
 		public function index()
 		{
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['content']		=	'Admin/home';
@@ -84,7 +84,7 @@
 		public function daftar_pengguna()
 		{
 			$this->checklogin();
-			$data['tittle']		= "Daftar Pengguna || SPK Guru Berprestasi";
+			$data['tittle']		= "Daftar Pengguna || SPK Promethee";
 			$id_pengguna		= $this->session->userdata('id');
 			$data['pengguna']	= $this->Data_model->data_pengguna($id_pengguna);
 			$data['user']		= $this->Data_model->daftar_pengguna();
@@ -97,7 +97,7 @@
 		public function edit_pengguna($id)
 		{
 			$this->checklogin();
-			$data['tittle']		= "Edit Pengguna || SPK Guru Berprestasi";
+			$data['tittle']		= "Edit Pengguna || SPK Promethee";
 			$id_pengguna		= $this->session->userdata('id');
 			$data['pengguna']	= $this->Data_model->data_pengguna($id_pengguna);
 			$data['user']		= $this->Data_model->detail_pengguna($id);
@@ -142,7 +142,7 @@
 		public function tambah_pengguna()
 		{
 			$this->checklogin();
-			$data['tittle']		= "Tambah Pengguna || SPK Guru Berprestasi";
+			$data['tittle']		= "Tambah Pengguna || SPK Promethee";
 			$id_pengguna		= $this->session->userdata('id');
 			$data['pengguna']	= $this->Data_model->data_pengguna($id_pengguna);
 			$data['level']      = $this->Data_model->data_level();
@@ -207,7 +207,7 @@
 		public function daftar_guru()
 		{
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['guru']			=	$this->Data_model->data_guru();
@@ -218,11 +218,11 @@
 		public function tambah_guru()
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['guru']			=	$this->Data_model->daftar_guru();
-			$data['kelas']			=	$this->Data_model->daftar_kelas();
+			$data['jurusan']			=	$this->Data_model->daftar_jurusan();
 			$data['content']		=	'Admin/tambah_guru';
 			$this->load->view('Admin/template',$data);
 		}
@@ -238,12 +238,12 @@
 		public function edit_guru($id)
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['user']			= $this->Data_model->guru($id);
 			$data['guru']			=	$this->Data_model->daftar_guru();
-			$data['kelas']			=	$this->Data_model->daftar_kelas();
+			$data['jurusan']			=	$this->Data_model->daftar_jurusan();
 			$data['content']		=	'Admin/edit_guru';
 			$this->load->view('Admin/template',$data);
 		}
@@ -253,10 +253,10 @@
 			$this->checklogin();
 
 			$data = array(
-				'id_kelas' => $this->input->post('id_kelas'),
+				'id_jurusan' => $this->input->post('id_jurusan'),
 			);
 				//$this->form_validation->set_rules("id","id","required");
-				$this->form_validation->set_rules("id_kelas","id_kelas","required");
+				$this->form_validation->set_rules("id_jurusan","id_jurusan","required");
 				
    			if($this->form_validation->run() == FALSE){
             	echo validation_errors();
@@ -274,11 +274,11 @@
 
 				$data = array(
 					'id'  => $this->input->post('id'),
-					'id_kelas'=> $this->input->post('id_kelas'),				
+					'id_jurusan'=> $this->input->post('id_jurusan'),				
 				);
 				
 				$this->form_validation->set_rules("id","id","required");
-				$this->form_validation->set_rules("id_kelas","id_kelas","required");
+				$this->form_validation->set_rules("id_jurusan","id_jurusan","required");
 				
    			if($this->form_validation->run() == FALSE){
             	echo validation_errors();
@@ -294,12 +294,12 @@
 		public function edit_siswa($id)
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
-			$data['siswa']			= 	$this->Data_model->siswa($id);
+			$data['mahasiswa']			= 	$this->Data_model->mahasiswa($id);
 			$data['guru']			=	$this->Data_model->daftar_guru();
-			$data['kelas']			=	$this->Data_model->daftar_kelas();
+			$data['jurusan']			=	$this->Data_model->daftar_jurusan();
 			$data['content']		=	'Admin/edit_siswa';
 			$this->load->view('Admin/template',$data);
 		}
@@ -314,12 +314,12 @@
 					'id'  => $result_explode[0],
 					'nama' => $result_explode[1],
 					'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-					'id_kelas'=> $this->input->post('id_kelas'),
+					'id_jurusan'=> $this->input->post('id_jurusan'),
 					'kecamatan' => $this->input->post('kecamatan'),			 
 				);
 				
 				$this->form_validation->set_rules("id","id","required");
-				$this->form_validation->set_rules("id_kelas","id_kelas","required");
+				$this->form_validation->set_rules("id_jurusan","id_jurusan","required");
 				
    			if($this->form_validation->run() == FALSE){
             	echo validation_errors();
@@ -327,7 +327,7 @@
         	else{
             	$this->Data_model->insert_siswa($data);
             	echo "<script> alert('Data SIswa disimpan.');</script>";
-            	redirect(base_url('Admin/Home/daftar_siswa'), 'refresh');
+            	redirect(base_url('Admin/Home/daftar_mahasiswa'), 'refresh');
       		}
 		}
 
@@ -341,12 +341,12 @@
 					'id'  => $result_explode[0],
 					'nama' => $result_explode[1],
 					'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-					'id_kelas'=> $this->input->post('id_kelas'),
+					'id_jurusan'=> $this->input->post('id_jurusan'),
 					'kecamatan' => $this->input->post('kecamatan'),			 
 				);
 				
 				$this->form_validation->set_rules("id","id","required");
-				$this->form_validation->set_rules("id_kelas","id_kelas","required");
+				$this->form_validation->set_rules("id_jurusan","id_jurusan","required");
 				
    			if($this->form_validation->run() == FALSE){
             	echo validation_errors();
@@ -354,118 +354,118 @@
         	else{
             	$this->Data_model->update_siswa($data,$ids);
             	echo "<script> alert('Data SIswa disimpan.');</script>";
-            	redirect(base_url('Admin/Home/daftar_siswa'), 'refresh');
+            	redirect(base_url('Admin/Home/daftar_mahasiswa'), 'refresh');
       		}
 		}
 
 
-		public function daftar_kelas()
+		public function daftar_jurusan()
 		{
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
-			$data['kelas']			=	$this->Data_model->daftar_kelas();
-			$data['content']		=	'Admin/daftar_kelas';
+			$data['jurusan']			=	$this->Data_model->daftar_jurusan();
+			$data['content']		=	'Admin/daftar_jurusan';
 			$this->load->view('Admin/template',$data);
 		}
 
-		public function tambah_kelas()
+		public function tambah_jurusan()
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
-			$data['content']		=	'Admin/tambah_kelas';
+			$data['content']		=	'Admin/tambah_jurusan';
 			$this->load->view('Admin/template',$data);
 		}
 
-		public function edit_kelas($id)
+		public function edit_jurusan($id)
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
-			$data['kelas']			= 	$this->Data_model->data_kelas($id);
-			$data['content']		=	'Admin/edit_kelas';
+			$data['jurusan']			= 	$this->Data_model->data_jurusan($id);
+			$data['content']		=	'Admin/edit_jurusan';
 			$this->load->view('Admin/template',$data);
 		}
 
-		public function proses_tambah_kelas()
+		public function proses_tambah_jurusan()
 		{
 			$this->checklogin();
 
 			
 				$tingkat     = $this->input->post('tingkat');
 				$konsentrasi = $this->input->post('konsentrasi');
-				$kelas 		 = $this->input->post('kelas');
+				$jurusan 		 = $this->input->post('jurusan');
 
-				$namakelas = $tingkat." ".$konsentrasi." ".$kelas;
+				$namajurusan = $tingkat." ".$konsentrasi." ".$jurusan;
 
 				$data = array(
-					'NamaKelas' => $namakelas
+					'NamaJurusan' => $namajurusan
 				);
 				
 				$this->form_validation->set_rules("tingkat","tingkat","required");
 				$this->form_validation->set_rules("konsentrasi","konsentrasi","required");
-				$this->form_validation->set_rules("kelas","kelas","required");
+				$this->form_validation->set_rules("jurusan","jurusan","required");
 				
    		
    			if($this->form_validation->run() == FALSE){
             	echo validation_errors();
         	}
         	else{
-            	$this->Data_model->insert_kelas($data);
-            	echo "<script> alert('Data Kelas disimpan.');</script>";
-            	redirect(base_url('Admin/Home/daftar_kelas'), 'refresh');
+            	$this->Data_model->insert_jurusan($data);
+            	echo "<script> alert('Data Jurusan disimpan.');</script>";
+            	redirect(base_url('Admin/Home/daftar_jurusan'), 'refresh');
       		}
 		}
 
-		public function proses_update_kelas($id)
+		public function proses_update_jurusan($id)
 		{
 			$this->checklogin();
 
 			
 				$tingkat     = $this->input->post('tingkat');
 				$konsentrasi = $this->input->post('konsentrasi');
-				$kelas 		 = $this->input->post('kelas');
+				$jurusan 		 = $this->input->post('jurusan');
 
-				$namakelas = $tingkat." ".$konsentrasi." ".$kelas;
+				$namajurusan = $tingkat." ".$konsentrasi." ".$jurusan;
 
 				$data = array(
-					'NamaKelas' => $namakelas
+					'NamaJurusan' => $namajurusan
 				);
 				
 				$this->form_validation->set_rules("tingkat","tingkat","required");
 				$this->form_validation->set_rules("konsentrasi","konsentrasi","required");
-				$this->form_validation->set_rules("kelas","kelas","required");
+				$this->form_validation->set_rules("jurusan","jurusan","required");
 				
    		
    			if($this->form_validation->run() == FALSE){
             	echo validation_errors();
         	}
         	else{
-            	$this->Data_model->update_kelas($id,$data);
-            	echo "<script> alert('Data Kelas disimpan.');</script>";
-            	redirect(base_url('Admin/Home/daftar_kelas'), 'refresh');
+            	$this->Data_model->update_jurusan($id,$data);
+            	echo "<script> alert('Data Jurusan disimpan.');</script>";
+            	redirect(base_url('Admin/Home/daftar_jurusan'), 'refresh');
       		}
 		}
 
-		public function hapus_kelas($id)
+		public function hapus_jurusan($id)
 		{
 			$this->checklogin();
-			$this->Data_model->hapus_kelas($id);
-        	redirect(base_url('Admin/Home/daftar_kelas'), 'refresh');
+			$this->Data_model->hapus_jurusan($id);
+        	redirect(base_url('Admin/Home/daftar_jurusan'), 'refresh');
 		}
 
-		public function daftar_siswa()
+		public function daftar_mahasiswa()
 		{
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
-			$data['siswa']			=	$this->Data_model->daftar_siswa();
-			$data['content']		=	'Admin/daftar_siswa';
+			$data['mahasiswa']			=	$this->Data_model->daftar_mahasiswa();
+			$data['content']		=	'Admin/daftar_mahasiswa';
 			$data['kriteria']       =   $this->Data_model->daftar_kriteria();
 			$this->load->view('Admin/template',$data);
 		}
@@ -473,11 +473,11 @@
 		public function tambah_siswa()
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
-			$data['siswa']			=	$this->Data_model->data_siswa();
-			$data['kelas']			=	$this->Data_model->daftar_kelas();
+			$data['mahasiswa']			=	$this->Data_model->data_siswa();
+			$data['jurusan']			=	$this->Data_model->daftar_jurusan();
 			$data['content']		=	'Admin/tambah_siswa';
 			$this->load->view('Admin/template',$data);
 		}
@@ -486,7 +486,7 @@
 		public function daftar_kriteria()
 		{
 			$this->checklogin();
-			$data['tittle']		= "Daftar Kriteria || SPK Guru Berprestasi";
+			$data['tittle']		= "Daftar Kriteria || SPK Promethee";
 			$id_pengguna		= $this->session->userdata('id');
 			$data['pengguna']	= $this->Data_model->data_pengguna($id_pengguna);
 			$data['kriteria']   = $this->Data_model->daftar_kriteria();
@@ -497,7 +497,7 @@
 		public function tambah_kriteria()
 		{
 			$this->checklogin();
-			$data['tittle']		= "Tambah Kriteria || SPK Guru Berprestasi";
+			$data['tittle']		= "Tambah Kriteria || SPK Promethee";
 			$id_pengguna		= $this->session->userdata('id');
 			$data['pengguna']	= $this->Data_model->data_pengguna($id_pengguna);
 			$data['kriteria']      = $this->Data_model->daftar_kriteria();
@@ -532,7 +532,7 @@
 		public function edit_kriteria($id)
 		{
 			$this->checklogin();
-			$data['tittle']		= "Daftar Kriteria || SPK Guru Berprestasi";
+			$data['tittle']		= "Daftar Kriteria || SPK Promethee";
 			$id_pengguna		= $this->session->userdata('id');
 			$data['pengguna']	= $this->Data_model->data_pengguna($id_pengguna);
 			$data['kriteria']   = $this->Data_model->data_kriteria($id);
@@ -571,12 +571,12 @@
 		{
 			$this->checklogin();
 			$this->Data_model->hapus_siswa($id);
-        	redirect(base_url('Admin/Home/daftar_siswa'), 'refresh');
+        	redirect(base_url('Admin/Home/daftar_mahasiswa'), 'refresh');
 		}
 		public function daftar_subkriteria()
 		{
 			$this->checklogin();
-			$data['tittle']		= "Daftar Sub Kriteria || SPK Guru Berprestasi";
+			$data['tittle']		= "Daftar Sub Kriteria || SPK Promethee";
 			$id_pengguna		= $this->session->userdata('id');
 			$data['pengguna']	= $this->Data_model->data_pengguna($id_pengguna);
 			$data['kriteria']   = $this->Data_model->daftar_kriteria();
@@ -588,7 +588,7 @@
 		public function edit_subkriteria($id)
 		{
 			$this->checklogin();
-			$data['tittle']		= "Edit SUb Kriteria || SPK Guru Berprestasi";
+			$data['tittle']		= "Edit SUb Kriteria || SPK Promethee";
 			$id_pengguna		= $this->session->userdata('id');
 			$data['pengguna']	= $this->Data_model->data_pengguna($id_pengguna);
 			$data['subkriteria']      = $this->Data_model->data_subkriteria($id);
@@ -621,7 +621,7 @@
 		public function tambah_subkriteria()
 		{
 			$this->checklogin();
-			$data['tittle']		= "Tambah Kriteria || SPK Guru Berprestasi";
+			$data['tittle']		= "Tambah Kriteria || SPK Promethee";
 			$id_pengguna		= $this->session->userdata('id');
 			$data['pengguna']	= $this->Data_model->data_pengguna($id_pengguna);
 			$data['kriteria']   = $this->Data_model->daftar_kriteria();
@@ -659,7 +659,7 @@
 		public function daftar_juri()
 		{
 			$this->checklogin();
-			$data['tittle']		= "Daftar Juri || SPK Guru Berprestasi";
+			$data['tittle']		= "Daftar Juri || SPK Promethee";
 			$id_pengguna		= $this->session->userdata('id');
 			$data['pengguna']	= $this->Data_model->data_pengguna($id_pengguna);
 			$data['juri']		= $this->Data_model->daftar_juri();
@@ -671,10 +671,10 @@
 		public function daftar_nilai()
         {
             $this->checklogin();
-            $data['tittle']         =   "Seleksi Kelas";
+            $data['tittle']         =   "Seleksi Jurusan";
             $id_pengguna            =   $this->session->userdata('id');
             $data['pengguna']       =   $this->Data_model->data_pengguna($id_pengguna);
-            $data['peserta']        =   $this->Data_model->daftar_siswa();
+            $data['peserta']        =   $this->Data_model->daftar_mahasiswa();
             $data['nilai_peserta']  =   $this->Data_model->nilai_peserta();
             $data['kriteria']       =   $this->Data_model->daftar_kriteria();
             //$data['nilai_bobot']    =   $this->Data_model->SumKriteria();
@@ -721,10 +721,10 @@
 		public function perhitungan_seleksi()
 		{
 			$this->checklogin();
-			$data['tittle']			=	"SPK Guru Berprestasi";
+			$data['tittle']			=	"SPK Promethee";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
-			$data['peserta']		=	$this->Data_model->daftar_siswa();
+			$data['peserta']		=	$this->Data_model->daftar_mahasiswa();
 			$data['nilai_peserta']  =   $this->Data_model->nilai_peserta();
 			$data['kriteria']		= 	$this->Data_model->daftar_kriteria();
 			$data['nilai_bobot']	=   $this->Data_model->SumKriteria();
@@ -735,7 +735,7 @@
 		public function proses_seleksi()
 		{
 			$this->checklogin();
-			$data['tittle']			=	"SPK Guru Berprestasi";
+			$data['tittle']			=	"SPK Promethee";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['data_kriteria'] = $this->Data_model->load_kriteria();
@@ -768,10 +768,10 @@
 
 		function input_nilaipsikotes()
 		{		
-			$data['tittle']			=	"SPK Seleksi Kelas Unggulan";
+			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
-			$data['siswa']			=	$this->Data_model->get_data_siswa_belum_nilai(4);
+			$data['mahasiswa']			=	$this->Data_model->get_data_siswa_belum_nilai(4);
 			$data['content']		=	'Admin/input_nilaipsikotes';
 			$this->load->view('Admin/template',$data);
 		}
@@ -779,8 +779,8 @@
 		function proses_input_npsikotes()
 		{
 				$id			=	$this->session->userdata('id');
-				$calon	    =	$this->Data_model->siswa($id);
-				$result = $this->input->post('siswa');
+				$calon	    =	$this->Data_model->mahasiswa($id);
+				$result = $this->input->post('mahasiswa');
 				$result_explode = explode('|', $result);
                 $res = $this->Data_model->tambah_nilai_psikotest($result_explode[2],$this->input->post("nilai"));
                 $this->nilaipsikotes();
@@ -788,10 +788,10 @@
 
 		public function nilaipsikotes()
         {
-            $data['tittle']         =   "Seleksi Kelas";
+            $data['tittle']         =   "Seleksi Jurusan";
             $id_pengguna            =   $this->session->userdata('id');
             $data['pengguna']       =   $this->Data_model->data_pengguna($id_pengguna);
-			$data['siswa']			=	$this->Data_model->read_nilai_psikotest();
+			$data['mahasiswa']			=	$this->Data_model->read_nilai_psikotest();
             $data['content']        =   'Admin/nilaipsikotes';
             $this->load->view('Admin/template',$data);
         }
@@ -800,7 +800,7 @@
         	$hasil;
         	if($aksi == "simpan" || $aksi == "umumkan" || $aksi=="cetak"){
                $hasil = $_POST["rangking"];
-        	   $d_siswa = $this->Data_model->daftar_siswa()->result_array();
+        	   $d_siswa = $this->Data_model->daftar_mahasiswa()->result_array();
 	        	$i = 1;
 	        	foreach ($hasil as  $value) {
 	        		foreach ($d_siswa as $value_s) {
@@ -822,15 +822,15 @@
                    $data["status"] =  $value['status'];
                    $this->Data_model->update_siswa($data,$value["id_siswa"]);
                 }
-                echo "Pengunguman Berhasil disampaikan ke siswa";
+                echo "Pengunguman Berhasil disampaikan ke mahasiswa";
         	}else if($aksi == "tarik"){
-        		$d_siswa = $this->Data_model->daftar_siswa()->result_array();
+        		$d_siswa = $this->Data_model->daftar_mahasiswa()->result_array();
         		foreach ($d_siswa as $value) {
         			$data = array();
         		  	$data["status"] = "Belom";
                     $this->Data_model->update_siswa($data,$value["id_siswa"]);
         		}
-        		echo "Pengunguman Di tarik dari siswa";
+        		echo "Pengunguman Di tarik dari mahasiswa";
         	}else if($aksi == "cetak"){
                 
         	}

@@ -74,7 +74,7 @@
 
 		public function login()
 		{
-			$data['data_kelas'] = $this->Data_model->daftar_kelas();
+			$data['data_jurusan'] = $this->Data_model->daftar_jurusan();
 			$this->load->view('login',$data);
 		}
 
@@ -144,14 +144,14 @@
 	                "id_leveling" => $temp[4],
 	                "jenis_kelamin" => $temp[5],
 	                "kecamatan" => $temp[6],
-	                "id_kelas" => $temp[7],
+	                "id_jurusan" => $temp[7],
 	                "asal_sekolah" => $temp[8],
 	                "ttl" => $temp[9],
 	                "alamat" => $temp[10],
 	                "no_hp" => $temp[11],
 	                "nis" => $temp[12]
 				];
-				$res = $this->Data_model->register_user($data,"siswa");
+				$res = $this->Data_model->register_user($data,"mahasiswa");
 			}else{
                 $data = [
 	                "nama"  => $temp[0],

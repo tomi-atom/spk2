@@ -38,11 +38,11 @@ class Data_model extends CI_Model{
 		    return $q;   
     }
 
-    function get_data_siswa_belum_nilai($id){
+    function get_data_mahasiswa_belum_nilai($id){
         $res = array();
-        $data_siswa = $this->db->query("SELECT * FROM siswa")->result_array();
-        foreach ($data_siswa as $value) {
-            $nilai = $this->db->query("SELECT * FROM calon_kriteria WHERE calon_kriteria.calon_id= ".$value['id_siswa']." AND calon_kriteria.id_kriteria=".$id)->result_array();
+        $data_mahasiswa = $this->db->query("SELECT * FROM mahasiswa")->result_array();
+        foreach ($data_mahasiswa as $value) {
+            $nilai = $this->db->query("SELECT * FROM calon_kriteria WHERE calon_kriteria.calon_id= ".$value['id_mahasiswa']." AND calon_kriteria.id_kriteria=".$id)->result_array();
             if(sizeof($nilai) == 0){
               array_push($res, $value);
             }
@@ -77,7 +77,7 @@ class Data_model extends CI_Model{
     function cek_profil($id)
     {
         $this->db->select('*');
-        $this->db->from('siswa p');
+        $this->db->from('mahasiswa p');
         $this->db->where('p.id',$id);
         $q	=	$this->db->get();
         return $q;
@@ -86,7 +86,7 @@ class Data_model extends CI_Model{
     function cek_nilaiun($id)
     {
         $this->db->select('*');
-        $this->db->from('siswa p');
+        $this->db->from('mahasiswa p');
         $this->db->join('nilaiun n','p.id=n.id');
         $this->db->where('p.id',$id);
         $q  =   $this->db->get();
@@ -96,8 +96,8 @@ class Data_model extends CI_Model{
     function cek_nilaik($id)
     {
         $this->db->select('*');
-        $this->db->from('siswa p');
-        $this->db->join('calon_kriteria c','p.id_siswa=c.calon_id');
+        $this->db->from('mahasiswa p');
+        $this->db->join('calon_kriteria c','p.id_mahasiswa=c.calon_id');
         $this->db->where('p.id',$id);
         $q  =   $this->db->get();
         return $q;
@@ -128,7 +128,7 @@ class Data_model extends CI_Model{
     function nilaiun($id)
     {
         $this->db->select('*');
-        $this->db->from('siswa p');
+        $this->db->from('mahasiswa p');
         $this->db->join('nilaiun n','p.id=n.id');
         $this->db->where('p.id',$id);
         $q  =   $this->db->get();
@@ -148,7 +148,7 @@ class Data_model extends CI_Model{
     function cek_sertifikat($id)
     {
         $this->db->select('*');
-        $this->db->from('siswa p');
+        $this->db->from('mahasiswa p');
         $this->db->join('sertifikat n','p.id=n.id');
         $this->db->where('p.id',$id);
         $q  =   $this->db->get();
@@ -159,7 +159,7 @@ class Data_model extends CI_Model{
     {
         $this->db->select('count(*)');
         $this->db->from('sertifikat s');
-        //$this->db->join('siswa p','s.id=p.id');
+        //$this->db->join('mahasiswa p','s.id=p.id');
         $this->db->where('s.id',$id);
         $q  =   $this->db->get();
         return $q;
@@ -248,16 +248,16 @@ class Data_model extends CI_Model{
         $this->db->update('leveling',$data);
     }
 
-    function update_siswa($data,$ids) 
+    function update_mahasiswa($data,$ids) 
     {
-        $this->db->where('id_siswa',$ids);
-        $this->db->update('siswa',$data);
+        $this->db->where('id_mahasiswa',$ids);
+        $this->db->update('mahasiswa',$data);
     }
 
-    function hapus_siswa($id)
+    function hapus_mahasiswa($id)
     {
-        $this->db->where('id_siswa',$id);
-        $this->db->delete('siswa');
+        $this->db->where('id_mahasiswa',$id);
+        $this->db->delete('mahasiswa');
     }
 
     function hapus_level($id)
@@ -266,67 +266,67 @@ class Data_model extends CI_Model{
 		$this->db->delete('leveling');
     }
 
-    function daftar_siswa()
+    function daftar_mahasiswa()
     {
         $this->db->select('*');
         $this->db->from('pengguna p');
-        $this->db->join('siswa l','l.id=p.id');
-        $this->db->join('kelas k','l.id_kelas=k.id_kelas');
+        $this->db->join('mahasiswa l','l.id=p.id');
+        $this->db->join('jurusan k','l.id_jurusan=k.id_jurusan');
         $this->db->where('p.id_leveling','2');
         $q  =   $this->db->get();
         return $q;
     }
 
-    function daftar_siswa_kelas($kelas)
+    function daftar_mahasiswa_jurusan($jurusan)
     {
         $this->db->select('*');
         $this->db->from('pengguna p');
-        $this->db->join('siswa l','l.id=p.id');
-        $this->db->join('kelas k','l.id_kelas=k.id_kelas');
+        $this->db->join('mahasiswa l','l.id=p.id');
+        $this->db->join('jurusan k','l.id_jurusan=k.id_jurusan');
         $this->db->where('p.id_leveling','2');
-        $this->db->where('l.id_kelas',$kelas);
+        $this->db->where('l.id_jurusan',$jurusan);
         $q  =   $this->db->get();
         return $q;
     }
 
-    function siswa($id) //id di tabel siswa
+    function mahasiswa($id) //id di tabel mahasiswa
     {
         $this->db->select('*');
-        $this->db->from('siswa');
-        $this->db->join('pengguna','siswa.id=pengguna.id');
-        $this->db->join('kelas','kelas.id_kelas=siswa.id_kelas');
-        $this->db->where('siswa.id_siswa',$id);
+        $this->db->from('mahasiswa');
+        $this->db->join('pengguna','mahasiswa.id=pengguna.id');
+        $this->db->join('jurusan','jurusan.id_jurusan=mahasiswa.id_jurusan');
+        $this->db->where('mahasiswa.id_mahasiswa',$id);
         $this->db->where('pengguna.id_leveling','2');
         $q  =   $this->db->get();
         return $q;
     }
 
-    function get_data_siswa($id){
+    function get_data_mahasiswa($id){
         $this->db->select('*');
-        $this->db->from('siswa');
-        $this->db->join('pengguna','siswa.id=pengguna.id');
-        $this->db->where('siswa.id_siswa',$id);
+        $this->db->from('mahasiswa');
+        $this->db->join('pengguna','mahasiswa.id=pengguna.id');
+        $this->db->where('mahasiswa.id_mahasiswa',$id);
         $this->db->where('pengguna.id_leveling','2');
         $q  =   $this->db->get()->result_array();
         return $q;
     }
 
-    function get_data_kelas($id=""){
+    function get_data_jurusan($id=""){
         $this->db->select('*');
-        $this->db->from('kelas');
+        $this->db->from('jurusan');
         if($id  != ""){
-           $this->db->where('id_kelas',$id);
+           $this->db->where('id_jurusan',$id);
         }
         $q  =   $this->db->get()->result_array();
         return $q;
     }
 
-    function get_id_siswa_by($id_pengguna){
-        $this->db->select('id_siswa');
-        $this->db->from('siswa');
-        $this->db->join('pengguna','siswa.id=pengguna.id');
+    function get_id_mahasiswa_by($id_pengguna){
+        $this->db->select('id_mahasiswa');
+        $this->db->from('mahasiswa');
+        $this->db->join('pengguna','mahasiswa.id=pengguna.id');
         $this->db->where('pengguna.id',$id_pengguna);
-        $q  =   $this->db->get()->row()->id_siswa;
+        $q  =   $this->db->get()->row()->id_mahasiswa;
         return $q;
     }
 
@@ -335,9 +335,9 @@ class Data_model extends CI_Model{
         $this->db->update('pengguna', $data);
     }
 
-    function data_siswa()
+    function data_mahasiswa()
     {
-        $query = $this->db->query("select * from pengguna p join leveling l on(p.id_leveling=l.id_leveling) where p.id_leveling = '2' AND  p.id NOT IN (Select id from siswa)");
+        $query = $this->db->query("select * from pengguna p join leveling l on(p.id_leveling=l.id_leveling) where p.id_leveling = '2' AND  p.id NOT IN (Select id from mahasiswa)");
         return $query;
     }
 
@@ -347,7 +347,7 @@ class Data_model extends CI_Model{
         $this->db->from('pengguna p');
         $this->db->join('leveling l','l.id_leveling=p.id_leveling');
         $this->db->join('guru g','p.id=g.id','left');
-        $this->db->join('kelas k','g.id_kelas=k.id_kelas','left');
+        $this->db->join('jurusan k','g.id_jurusan=k.id_jurusan','left');
         $this->db->where('p.id_leveling','3');
         $q  =   $this->db->get();
         return $q;
@@ -369,7 +369,7 @@ class Data_model extends CI_Model{
         $this->db->from('pengguna p');
         $this->db->join('leveling l','l.id_leveling=p.id_leveling');
         $this->db->join('guru g','p.id=g.id','left');
-        $this->db->join('kelas k','g.id_kelas=k.id_kelas','left');
+        $this->db->join('jurusan k','g.id_jurusan=k.id_jurusan','left');
         $this->db->where('p.id_leveling','3');
         $this->db->where('g.id_guru',$id);
         $q  =   $this->db->get();
@@ -392,9 +392,9 @@ class Data_model extends CI_Model{
         $this->db->insert('guru',$data);
     }
 
-    function insert_siswa($data)
+    function insert_mahasiswa($data)
     {
-        $this->db->insert('siswa',$data);
+        $this->db->insert('mahasiswa',$data);
     }
     function hapus_guru($id)
     {
@@ -402,19 +402,19 @@ class Data_model extends CI_Model{
         $this->db->delete('guru');
     }
 
-    function daftar_kelas()
+    function daftar_jurusan()
     {
         $this->db->select('*');
-        $this->db->from('kelas');
+        $this->db->from('jurusan');
         $q  =   $this->db->get();
         return $q;
     }
 
-    function data_kelas($id)
+    function data_jurusan($id)
     {
         $this->db->select('*');
-        $this->db->from('kelas');
-         $this->db->where('id_kelas',$id);
+        $this->db->from('jurusan');
+         $this->db->where('id_jurusan',$id);
         $q  =   $this->db->get();
         return $q;
     }
@@ -424,21 +424,21 @@ class Data_model extends CI_Model{
         $this->db->insert('psikotes',$data);
     }
 
-    function hapus_kelas($id)
+    function hapus_jurusan($id)
     {
-        $this->db->where('id_kelas',$id);
-        $this->db->delete('kelas');
+        $this->db->where('id_jurusan',$id);
+        $this->db->delete('jurusan');
     }
 
-    function update_kelas($id,$data)
+    function update_jurusan($id,$data)
     {
-         $this->db->where('id_kelas',$id);
-        $this->db->update('kelas',$data);
+         $this->db->where('id_jurusan',$id);
+        $this->db->update('jurusan',$data);
     }
 
-    function insert_kelas($data)
+    function insert_jurusan($data)
     {
-        $this->db->insert('kelas',$data);
+        $this->db->insert('jurusan',$data);
     }
 
     function nilaipsikotes()
@@ -548,12 +548,12 @@ class Data_model extends CI_Model{
 
     function load_calon()
     {
-       $hasil = $this->db->query("SELECT distinct * FROM siswa JOIN calon_kriteria ON (siswa.id_siswa=calon_kriteria.calon_id) JOIN kelas on siswa.id_kelas = kelas.id_kelas");
+       $hasil = $this->db->query("SELECT distinct * FROM mahasiswa JOIN calon_kriteria ON (mahasiswa.id_mahasiswa=calon_kriteria.calon_id) JOIN jurusan on mahasiswa.id_jurusan = jurusan.id_jurusan");
 
         while ($data_row = mysqli_fetch_assoc($hasil->result_id)) {
             $datas['data'][$data_row['id']] = $data_row;
 
-            $hasil2 = $this->db->query("SELECT kriteria.nama, kriteria.id_kriteria AS nama_kriteria, calon_kriteria.value  FROM calon_kriteria join kriteria ON (kriteria.ID_KRITERIA=calon_kriteria.id_kriteria) WHERE calon_kriteria.CALON_ID =".$datas['data'][$data_row['id']]['id_siswa']);
+            $hasil2 = $this->db->query("SELECT kriteria.nama, kriteria.id_kriteria AS nama_kriteria, calon_kriteria.value  FROM calon_kriteria join kriteria ON (kriteria.ID_KRITERIA=calon_kriteria.id_kriteria) WHERE calon_kriteria.CALON_ID =".$datas['data'][$data_row['id']]['id_mahasiswa']);
 
             while ($data_row2 = mysqli_fetch_assoc($hasil2->result_id)) {
                 $datas['data'][$data_row['id']]['kriteria'][$data_row2['nama']] = $data_row2;
@@ -651,19 +651,19 @@ class Data_model extends CI_Model{
         return $q; 
     }
 
-    public function read_siswa_by($id_siswa=""){
+    public function read_mahamahasiswa_by($id_mahasiswa=""){
         $this->db->select('*');
-        $this->db->from('siswa a');
+        $this->db->from('mahasiswa a');
         $this->db->join('pengguna b','a.id=b.id');
-         $this->db->join('kelas c','a.id_kelas=c.id_kelas');
-         if($id_siswa != ""){
-           $this->db->where('a.id_siswa = '.$id_siswa); 
+         $this->db->join('jurusan c','a.id_jurusan=c.id_jurusan');
+         if($id_mahasiswa != ""){
+           $this->db->where('a.id_mahasiswa = '.$id_mahasiswa); 
          }
         $res = $this->db->get();
         return $res->result_array();
     }
 
-    public function read_kriteria_by_id_siswa($id){
+    public function read_kriteria_by_id_mahasiswa($id){
        $this->db->select('*');
        $this->db->from('calon_kriteria a');
        $this->db->where('a.calon_id = '.$id);
@@ -674,7 +674,7 @@ class Data_model extends CI_Model{
     public function read_nilai_psikotest(){
         $this->db->select('*');        
         $this->db->from('calon_kriteria');
-        $this->db->join('siswa','calon_kriteria.calon_id=id_siswa','inner');
+        $this->db->join('mahasiswa','calon_kriteria.calon_id=id_mahasiswa','inner');
         $this->db->where('calon_kriteria.id_kriteria = 4');
         $res = $this->db->get();
         return $res->result_array();
@@ -682,7 +682,7 @@ class Data_model extends CI_Model{
 
     public function register_user($data,$tipe){
           $res;
-          if($tipe == "siswa"){
+          if($tipe == "mahasiswa"){
             $p_data = [
                  "nama"  => $data["nama"],
                  "email" => $data["email"],
@@ -696,7 +696,7 @@ class Data_model extends CI_Model{
                 "nama" => $data["nama"],
                 "jenis_kelamin" => $data["jenis_kelamin"],
                 "kecamatan" => $data["kecamatan"],
-                "id_kelas" => $data["id_kelas"],
+                "id_jurusan" => $data["id_jurusan"],
                 "asal_sekolah" => $data["asal_sekolah"],
                 "ttl" => $data["ttl"],
                 "alamat" => $data["alamat"],
@@ -705,7 +705,7 @@ class Data_model extends CI_Model{
                 "submit_by" => NULL
             ];
              if($res == 1){
-                 $res = $this->db->insert("siswa",$s_data);
+                 $res = $this->db->insert("mahasiswa",$s_data);
              }
           }else{
              $res = $this->db->insert("pengguna",$data);
@@ -736,14 +736,14 @@ class Data_model extends CI_Model{
     }
 
     public function ambil_nilai_akademik_by($id_guru){
-        $this->db->select('id_kelas');        
+        $this->db->select('id_jurusan');        
         $this->db->from('guru');
         $this->db->join('pengguna','pengguna.id=guru.id');
         $this->db->where('pengguna.id=',$id_guru);
         $res = $this->db->get()->result_array();
         if(sizeof($res) > 0){
-            $id_kelas = $res[0]["id_kelas"];
-            $res = $this->db->query("SELECT * FROM calon_kriteria INNER JOIN siswa on siswa.id_siswa = calon_kriteria.calon_id WHERE siswa.id_kelas=".$id_kelas." AND calon_kriteria.id_kriteria = 3")->result_array();
+            $id_jurusan = $res[0]["id_jurusan"];
+            $res = $this->db->query("SELECT * FROM calon_kriteria INNER JOIN mahasiswa on mahasiswa.id_mahasiswa = calon_kriteria.calon_id WHERE mahasiswa.id_jurusan=".$id_jurusan." AND calon_kriteria.id_kriteria = 3")->result_array();
         }else{
            $res = array();
         }
@@ -756,7 +756,7 @@ class Data_model extends CI_Model{
             $data = array();
             $data = [
                  "Nama" => $value["nama"],
-                 "Id_siswa" => $value["id_siswa"],
+                 "Id_mahasiswa" => $value["id_mahasiswa"],
                  "Leaving_flow" => $value["leaving"],
                  "Entering_flow" => $value["entering"],
                  "Net_Flow" => $value["net_flow"]
@@ -787,20 +787,20 @@ class Data_model extends CI_Model{
            $this->db->insert("nilaiakademik",$value);
        }
        $data_nilai = [
-           "calon_id" => $data[0]->id_siswa,
+           "calon_id" => $data[0]->id_mahasiswa,
            "Id_kriteria" => $id_kriteria,
            "value" => $rerata
        ];
        $this->db->insert("calon_kriteria",$data_nilai);
     }
 
-    public function get_nilai_akademik_by($id_siswa){
-      $res = $this->db->query('SELECT nama_mp,nilai FROM nilaiakademik INNER JOIN mata_pelajaran ON nilaiakademik.id_mp = mata_pelajaran.id_mp INNER JOIN siswa ON siswa.id_siswa = nilaiakademik.id_siswa WHERE siswa.id_siswa = '.$id_siswa)->result_array();
+    public function get_nilai_akademik_by($id_mahasiswa){
+      $res = $this->db->query('SELECT nama_mp,nilai FROM nilaiakademik INNER JOIN mata_pelajaran ON nilaiakademik.id_mp = mata_pelajaran.id_mp INNER JOIN mahasiswa ON mahasiswa.id_mahasiswa = nilaiakademik.id_mahasiswa WHERE mahasiswa.id_mahasiswa = '.$id_mahasiswa)->result_array();
       return $res;
     }
 
-    public function get_rerata_nilai_by($id_siswa){
-       $res = $this->db->query('SELECT kriteria.nama,calon_kriteria.value FROM calon_kriteria INNER JOIN kriteria ON calon_kriteria.id_kriteria = kriteria.id_kriteria INNER JOIN siswa ON siswa.id_siswa = calon_kriteria.calon_id WHERE siswa.id_siswa = '.$id_siswa)->result_array();
+    public function get_rerata_nilai_by($id_mahasiswa){
+       $res = $this->db->query('SELECT kriteria.nama,calon_kriteria.value FROM calon_kriteria INNER JOIN kriteria ON calon_kriteria.id_kriteria = kriteria.id_kriteria INNER JOIN mahasiswa ON mahasiswa.id_mahasiswa = calon_kriteria.calon_id WHERE mahasiswa.id_mahasiswa = '.$id_mahasiswa)->result_array();
       return $res;
     }
 

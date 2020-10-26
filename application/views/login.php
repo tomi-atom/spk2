@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SPK Kelas Unggulan | Log in</title>
+  <title>SPK Promethee | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -28,10 +28,10 @@
  
 
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
+<body lcass="hold-transition login-page">
+<div class="login-box">2
   <div class="login-logo">
-    <a href="<?php echo base_url();?>index2.html"><b>Seleksi</b>Kelas Unggulan</a>
+    <a href="<?php echo base_url();?>index2.html"><b>Sistem Pendukung Keputusan</b>Metode Promethee</a>
   </div>
     <?php 
          
@@ -193,6 +193,7 @@
     <!-- /.login-card-body -->
   </div>
 </div>
+</body>
 <!-- /.login-box -->
 
 <!-- jQuery -->
@@ -308,5 +309,5 @@
       }
   })
 </script>
-</body>
+
 </html>

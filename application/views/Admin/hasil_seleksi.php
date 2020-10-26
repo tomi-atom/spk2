@@ -67,7 +67,7 @@ foreach ($data_kriteria['data'] as $key_kriteria => $value_kriteria) {
 				$hasil['A'.($j+1)]['net_flow'] = $hasil['A'.($j+1)]['leaving']-$hasil['A'.($j+1)]['entering'];
 				$hasil['A'.($j+1)]['status'] = $hasil['A'.($j+1)]['net_flow'] < 0 ? 'Ditolak' : 'Diterima';
                 $hasil['A'.($j+1)]['nama'] = $value['nama'];
-                $hasil['A'.($j+1)]['kelas'] = $value['NamaKelas'];
+                $hasil['A'.($j+1)]['jurusan'] = $value['NamaJurusan'];
 				$j++;
 			}
 
@@ -173,7 +173,7 @@ foreach ($data_kriteria['data'] as $key_kriteria => $value_kriteria) {
                                         <tr>
                                             <th>Alternatif</th>
                                             <th>Nama</th>
-                                            <th>Kelas</th>
+                                            <th>Jurusan</th>
                                             <th>Leaving Flow</th>
                                             <th>Entering Flow</th>
                                             <th>Net Flow</th>
@@ -187,7 +187,7 @@ foreach ($data_kriteria['data'] as $key_kriteria => $value_kriteria) {
                                             <tr>
                                                 <td><?php echo $key ?></td>
                                                 <td><?php echo $value['nama']; ?></td>
-                                                <td><?php echo $value['kelas']; ?></td>
+                                                <td><?php echo $value['jurusan']; ?></td>
                                                 <td><?php echo $value['leaving'] ?></td>
                                                 <td><?php echo $value['entering'] ?></td>
                                                 <td><?php echo $value['net_flow'] ?></td>
@@ -199,10 +199,10 @@ foreach ($data_kriteria['data'] as $key_kriteria => $value_kriteria) {
                                             </tr>
                                         <?php
                                             
-                                            if(strpos($value['kelas'],'IPA')!=false && $value['status']=='Diterima'){
+                                            if(strpos($value['jurusan'],'IPA')!=false && $value['status']=='Diterima'){
                                                 $ipa++;
                                             }
-                                            if(strpos($value['kelas'],'IPS')!=false && $value['status']=='Diterima'){
+                                            if(strpos($value['jurusan'],'IPS')!=false && $value['status']=='Diterima'){
                                                 $ips++;
                                             }
                                     } ?>
@@ -355,7 +355,7 @@ foreach ($data_kriteria['data'] as $key_kriteria => $value_kriteria) {
 
                   </div>
                 </div>
-                <div id='show' style="display:none;"><h5>- Kelas IPA tersisa <?=30-$ipa?> siswa<br>- Kelas IPS tersisa <?=30-$ips?> siswa</h5></div>
+                <div id='show' style="display:none;"><h5>- Jurusan IPA tersisa <?=30-$ipa?> mahasiswa<br>- Jurusan IPS tersisa <?=30-$ips?> mahasiswa</h5></div>
             </div>
             
             <a id="simpan_hasil" ><button class="btn btn-lg btn-primary">Simpan hasil rangking</button></a>

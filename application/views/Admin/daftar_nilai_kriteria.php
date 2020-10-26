@@ -41,19 +41,19 @@
                                <?php
                                     $no=0;
                                      if(sizeof($peserta->result_array())>0){
-                                           $panjang_id_siswa = $peserta->result_array()[sizeof($peserta->result_array())-1]["id_siswa"];
+                                           $panjang_id_mahasiswa = $peserta->result_array()[sizeof($peserta->result_array())-1]["id_mahasiswa"];
                                     }
                                     foreach($peserta->result_array() as $data) {
                                     $no++;
                                   ?>
                                   <tr>
                                     <td><?php echo "".$no; ?></td>
-                                    <td><a href="#" id="siswa<?= $data['id_siswa']?>" data-toggle="modal" data-target="#modal-default"><?php echo $data['nama']; ?></a></td>
+                                    <td><a href="#" id="siswa<?= $data['id_mahasiswa']?>" data-toggle="modal" data-target="#modal-default"><?php echo $data['nama']; ?></a></td>
                                     <?php 
                                       foreach ($kriteria->result_array() as $namakriteria) {
                                         foreach ($nilai_peserta->result_array() as $nilai) {
                                           if($namakriteria['id_kriteria']==$nilai['id_kriteria']){
-                                            if ($nilai['calon_id']==$data['id_siswa']) {
+                                            if ($nilai['calon_id']==$data['id_mahasiswa']) {
                                   ?>
                                     <td><?php echo $nilai['value']; ?></td>
                                   <?php
@@ -134,7 +134,7 @@
 
       <script type="text/javascript">
   $(document).ready(function(){
-     var panjang          = <?= $panjang_id_siswa; ?>;
+     var panjang          = <?= $panjang_id_mahasiswa; ?>;
      var panjang_kriteria = <?= $kriteria->result_array()[sizeof($kriteria->result_array())-1]["id_kriteria"]?>;
      var data;
      for(let i=0;i<=panjang;i++){

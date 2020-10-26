@@ -22,14 +22,10 @@
                     <div class="card card-success">
                         <div class="card-header">
                             <h2 class="card-title">
-                                SPK - Guru Berprestasi Dinas Pendidikan Lubuk Linggau
+														Sistem Pendukung Keputusan (SPK) Menggunakan Metode Promethee
                             </h2>
                           </div>
-                        <div class="body">
-                            <div align="center">
-                                <p>Sistem Pendukung Keputusan (SPK) atau Decision Support System (DSS) adalah sebuah sistem yang mampu memberikan kemampuan pemecahan masalah maupun kemampuan pengkomunikasian untuk masalah dengan kondisi semi terstruktur dan tak terstruktur. Sistem ini digunakan untuk membantu pengambilan keputusan dalam situasi semi terstruktur dan situasi yang tidak terstruktur, dimana tak seorangpun tahu secara pasti bagaimana keputusan seharusnya dibuat</p>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

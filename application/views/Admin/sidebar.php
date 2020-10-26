@@ -32,8 +32,7 @@
   <aside class="main-sidebar elevation-4 sidebar-light-info">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="<?php echo base_url();?>asset/gambar/logo.png" alt="Methodist Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
+    
       <span class="brand-text font-weight-light">Seleksi Kelas Prestasi</span>
     </a>
 
@@ -68,83 +67,12 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link <?= $guru_label; ?>">
-              <i class="nav-icon fa fa-graduation-cap"></i>
-              <p>
-                Guru
-                <i class="right fa fa-angle-left"></i><!--<span class="right badge badge-danger">New</span>-->
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-                 <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon fa fa-address-card"></i>
-                      <p>
-                        Kelas
-                        <i class="fa fa-angle-left right"></i>
-                      </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="<?php echo base_url();?>Admin/Home/daftar_kelas" class="nav-link">
-                          <i class="fa fa-circle-o nav-icon"></i>
-                          <p>Daftar Kelas</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="<?php echo base_url();?>Admin/Home/tambah_kelas" class="nav-link">
-                          <i class="fa fa-circle-o nav-icon"></i>
-                          <p>Input Kelas</p>
-                        </a>
-                      </li>
-                    </ul>
-          </li>
-            </ul>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?php echo base_url();?>Admin/Home/daftar_guru" class="nav-link">
-                  <i class="fa fa-table nav-icon"></i>
-                  <p>Daftar Guru</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?php echo base_url();?>Admin/Home/tambah_guru" class="nav-link">
-                  <i class="fa fa-edit nav-icon"></i>
-                  <p>Input Guru</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link <?= $npsikotest_label; ?>">
-              <i class="nav-icon fa fa-bar-chart"></i>
-              <p>
-                Nilai Psikotes
-                <i class="right fa fa-angle-left"></i><!--<span class="right badge badge-danger">New</span>-->
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                
-                        <a href="<?php echo base_url('Admin/Home/input_nilaipsikotes');?>" class="nav-link">
-                            <i class="fa fa-edit nav-icon"></i>
-                            <span>Input Nilai Psikotes</span>
-                        </a>
-              
-                        <a href="<?php echo base_url('Admin/Home/nilaipsikotes');?>" class="nav-link">
-                            <i class="fa fa-user nav-icon"></i>
-                            <span>Daftar Nilai Psikotes</span>
-                        </a>
        
-              </li>
-            </ul>
-          </li>
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link <?= $siswa_label; ?>">
               <i class="nav-icon fa fa-users"></i>
               <p>
-                Siswa
+                Mahasiswa
                 <i class="right fa fa-angle-left"></i><!--<span class="right badge badge-danger">New</span>-->
               </p>
             </a>
@@ -152,13 +80,13 @@
               <li class="nav-item">
                 <a href="<?php echo base_url();?>Admin/Home/daftar_siswa" class="nav-link">
                   <i class="fa fa-table nav-icon"></i>
-                  <p>Daftar Siswa</p>
+                  <p>Daftar Mahasiswa</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?php echo base_url();?>Admin/Home/tambah_siswa" class="nav-link">
                   <i class="fa fa-edit nav-icon"></i>
-                  <p>Input Siswa</p>
+                  <p>Input Mahasiswa</p>
                 </a>
               </li>
             </ul>
