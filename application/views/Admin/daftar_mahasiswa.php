@@ -25,7 +25,7 @@
                                 Daftar Pengguna
                             </h2>
                             <div class="pull-right">
-                                <a href="<?php echo site_url('Admin/Home/tambah_siswa'); ?>" class="btn btn-info">Add</a> 
+                                <a href="<?php echo site_url('Admin/Home/tambah_mahasiswa'); ?>" class="btn btn-info">Add</a> 
                             </div>
                         </div>
                         <div class="card-body">
@@ -36,31 +36,29 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Email</th>
-                                    <th>Siswa Kelas</th>
+                                    <th>Jurusan</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Kecamatan</th>
                                     <th>Actions</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <?php
                                     $c = 1;
-                                  if(sizeof($siswa->result_array())>0){
-                                           $panjang_id_siswa = $siswa->result_array()[sizeof($siswa->result_array())-1]["id_siswa"];
+                                  if(sizeof($mahasiswa->result_array())>0){
+                                           $panjang_id_mahasiswa = $mahasiswa->result_array()[sizeof($mahasiswa->result_array())-1]["id_mahasiswa"];
                                   }
-                                 foreach($siswa->result_array() as $p){ ?>
+                                 foreach($mahasiswa->result_array() as $p){ ?>
                                     
                                 <tr>
                                     <td><?php echo $c; ?></td>
-                                    <td><a id="siswa<?= $p['id_siswa']?>" href="#" data-toggle="modal" data-target="#modal-default"><?php echo $p['nama']; ?></a></td>
-                                    <input type="hidden" name="" id="nama_siswa<?= $p['id_siswa']?>" value="<?php echo $p['nama']; ?>" >
+                                    <td><a id="mahasiswa<?= $p['id_mahasiswa']?>" href="#" data-toggle="modal" data-target="#modal-default"><?php echo $p['nama']; ?></a></td>
+                                    <input type="hidden" name="" id="nama_mahasiswa<?= $p['id_mahasiswa']?>" value="<?php echo $p['nama']; ?>" >
                                     <td><?php echo $p['email']; ?></td>
-                                    <td><?php echo $p['NamaKelas']; ?></td>
+                                    <td><?php echo $p['NamaJurusan']; ?></td>
                                     <td><?php echo $p['jenis_kelamin']; ?></td>
-                                    <td><?php echo $p['kecamatan']; ?></td>
                                     <td>
-                                        <a href="<?php echo base_url('Admin/Home/edit_siswa/'.$p['id_siswa']); ?>" class="btn btn-info btn-xs">Edit</a> 
-                                        <a href="<?php echo site_url('Admin/Home/hapus_siswa/'.$p['id_siswa']); ?>" class="btn btn-danger btn-xs">Delete</a>
+                                        <a href="<?php echo base_url('Admin/Home/edit_mahasiswa/'.$p['id_mahasiswa']); ?>" class="btn btn-info btn-xs">Edit</a> 
+                                        <a href="<?php echo site_url('Admin/Home/hapus_mahasiswa/'.$p['id_mahasiswa']); ?>" class="btn btn-danger btn-xs">Delete</a>
                                     </td>
                                 </tr>
                                 <?php $c++; } ?>
@@ -78,7 +76,7 @@
           <div class="modal-dialog">
             <div class="modal-content"  style="width: 600px">
               <div class="modal-header">
-                <h4 class="modal-title" id="view_nama_siswa">Nama Siswa</h4>
+                <h4 class="modal-title" id="view_nama_mahasiswa">Nama Siswa</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
               </div>
@@ -133,20 +131,20 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-     var panjang          = <?= $panjang_id_siswa; ?>;
+     var panjang          = <?= $panjang_id_mahasiswa; ?>;
      var panjang_kriteria = <?= $kriteria->result_array()[sizeof($kriteria->result_array())-1]["id_kriteria"]?>;
      var data;
      for(let i=0;i<=panjang;i++){
-        $("#siswa"+i).click(function(){
-            $.post("<?= base_url()?>Admin/Home/read_detail_siswa",{id : i},function(data){
+        $("#mahasiswa"+i).click(function(){
+            $.post("<?= base_url()?>Admin/Home/read_detail_mahasiswa",{id : i},function(data){
                 data = JSON.parse(data);
                 console.log(data);
                 clear_view(data);
-                $("#view_nama_siswa").text(data.data_siswa[0].nama);
-                $("#view_email").text(data.data_siswa[0].email);
-                $("#view_jk").text(data.data_siswa[0].jenis_kelamin);
-                $("#view_kelas").text(data.data_siswa[0].NamaKelas);
-                $("#view_kec").text(data.data_siswa[0].kecamatan);
+                $("#view_nama_mahasiswa").text(data.data_mahasiswa[0].nama);
+                $("#view_email").text(data.data_mahasiswa[0].email);
+                $("#view_jk").text(data.data_mahasiswa[0].jenis_kelamin);
+                $("#view_kelas").text(data.data_mahasiswa[0].NamaKelas);
+                $("#view_kec").text(data.data_mahasiswa[0].kecamatan);
                 for(let j=0;j<data.data_kriteria.length;j++){
                    $("#kriteria"+data.data_kriteria[j].id_kriteria).text(data.data_kriteria[j].value);
                 }

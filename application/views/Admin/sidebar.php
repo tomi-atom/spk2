@@ -4,7 +4,7 @@
   $pengguna_label = "";
   $guru_label = "";
   $npsikotest_label = "";
-  $siswa_label = "";
+  $mahasiswa_label = "";
   $kriteria_label = "";
   $kelas_label = "";
   $nilai_label = "";
@@ -17,8 +17,8 @@
        $guru_label = "active";
   }else if($content == "Admin/input_nilaipsikotes" || $content == "Admin/nilaipsikotes"){
        $npsikotest_label = "active";
-  }else if($content == "Admin/daftar_siswa" || $content == "Admin/tambah_siswa"){
-       $siswa_label = "active";
+  }else if($content == "Admin/daftar_mahasiswa" || $content == "Admin/tambah_mahasiswa"){
+       $mahasiswa_label = "active";
   }else if($content == "Admin/daftar_kriteria" || $content == "Admin/tambah_kriteria"){
       $kriteria_label = "active";
   }else if($content == "Admin/daftar_nilai_kriteria"){
@@ -69,7 +69,7 @@
           </li>
        
            <li class="nav-item has-treeview">
-            <a href="#" class="nav-link <?= $siswa_label; ?>">
+            <a href="#" class="nav-link <?= $mahasiswa_label; ?>">
               <i class="nav-icon fa fa-users"></i>
               <p>
                 Mahasiswa
@@ -78,13 +78,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<?php echo base_url();?>Admin/Home/daftar_siswa" class="nav-link">
+                <a href="<?php echo base_url();?>Admin/Home/daftar_mahasiswa" class="nav-link">
                   <i class="fa fa-table nav-icon"></i>
                   <p>Daftar Mahasiswa</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?php echo base_url();?>Admin/Home/tambah_siswa" class="nav-link">
+                <a href="<?php echo base_url();?>Admin/Home/tambah_mahasiswa" class="nav-link">
                   <i class="fa fa-edit nav-icon"></i>
                   <p>Input Mahasiswa</p>
                 </a>

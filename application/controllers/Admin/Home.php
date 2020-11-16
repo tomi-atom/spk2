@@ -470,7 +470,7 @@
 			$this->load->view('Admin/template',$data);
 		}
 
-		public function tambah_siswa()
+		public function tambah_mahasiswa()
 		{	
 			$this->checklogin();
 			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
@@ -765,6 +765,7 @@
 
 			 echo json_encode($data);
 		}
+
 
 		function input_nilaipsikotes()
 		{		

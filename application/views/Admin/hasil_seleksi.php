@@ -23,7 +23,7 @@ foreach ($data_kriteria['data'] as $key_kriteria => $value_kriteria) {
 						$tmp_bobot_x =  $value_calon_x['kriteria'][$key_kriteria]['value'];
 						$jka = $tmp_bobot_y-$tmp_bobot_x;	
 
-						$jarak_kriteria[$key_kriteria]['A'.$y][] = $jka;
+						$jarak_kriteria[$key_kriteria]['A cd              '.$y][] = $jka;
 
 						//echo tresholdP($value_kriteria['id_kriteria'])."--".tresholdQ($value_kriteria['id_kriteria'])."||";
 
@@ -177,12 +177,11 @@ foreach ($data_kriteria['data'] as $key_kriteria => $value_kriteria) {
                                             <th>Leaving Flow</th>
                                             <th>Entering Flow</th>
                                             <th>Net Flow</th>
-                                            <th>Status</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $ipa = 0;
-                                            $ips = 0;
+                                        <?php 
                                         foreach ($hasil as $key => $value){ ?>
                                             <tr>
                                                 <td><?php echo $key ?></td>
@@ -191,20 +190,10 @@ foreach ($data_kriteria['data'] as $key_kriteria => $value_kriteria) {
                                                 <td><?php echo $value['leaving'] ?></td>
                                                 <td><?php echo $value['entering'] ?></td>
                                                 <td><?php echo $value['net_flow'] ?></td>
-                                                <td>
-                                                    <span class="label label-<?php echo $value['status']=='Diterima' ? 'warning' : 'default' ?>">
-                                                        <?php echo $value['status'] ?>
-                                                    </span>
-                                                </td>
+                                               
                                             </tr>
                                         <?php
-                                            
-                                            if(strpos($value['jurusan'],'IPA')!=false && $value['status']=='Diterima'){
-                                                $ipa++;
-                                            }
-                                            if(strpos($value['jurusan'],'IPS')!=false && $value['status']=='Diterima'){
-                                                $ips++;
-                                            }
+                                           
                                     } ?>
                                     </tbody>
                                 </table>
@@ -355,14 +344,8 @@ foreach ($data_kriteria['data'] as $key_kriteria => $value_kriteria) {
 
                   </div>
                 </div>
-                <div id='show' style="display:none;"><h5>- Jurusan IPA tersisa <?=30-$ipa?> mahasiswa<br>- Jurusan IPS tersisa <?=30-$ips?> mahasiswa</h5></div>
             </div>
-            
-            <a id="simpan_hasil" ><button class="btn btn-lg btn-primary">Simpan hasil rangking</button></a>
-             <a id="cetak_hasil" ><button class="btn btn-lg btn-success">Cetak hasil rangking</button></a>
-              <a id="umumkan_hasil" ><button class="btn btn-lg btn-warning">Umumkan</button></a>
-               <a id="tarik_hasil" ><button class="btn btn-lg btn-danger">Tarik Pengunguman</button></a>
-               <a id="tarik_kuota" ><button class="btn btn-lg btn-danger" onClick="kuota(this)">Cek Kuota</button></a>
+        
         </div>
         <!-- /#page-wrapper -->
     </section>
@@ -381,28 +364,6 @@ foreach ($data_kriteria['data'] as $key_kriteria => $value_kriteria) {
                })
             });
 
-            $("#umumkan_hasil").click(function(){
-               var hasil = <?= json_encode($hasil)?>;
-               $.post("<?= base_url() ?>Admin/Home/hasil/umumkan",{rangking : hasil},
-                function(res){
-                   toastr.success(res,"Berhasil");
-               })
-            });
-
-            $("#cetak_hasil").click(function(){
-                w=window.open();
-                w.document.write($('#result').html());
-                w.print();
-                w.close();
-                   
-            });
-
-             $("#tarik_hasil").click(function(){
-               var hasil = <?= json_encode($hasil)?>;
-               $.post("<?= base_url() ?>Admin/Home/hasil/tarik",
-                function(res){
-                   toastr.success(res,"Berhasil");
-               })
-            });
+          
         });
     </script>
