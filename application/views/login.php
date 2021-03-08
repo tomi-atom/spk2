@@ -29,7 +29,7 @@
 
 </head>
 <body lcass="hold-transition login-page">
-<div class="login-box">2
+<div class="login-box">
   <div class="login-logo">
     <a href="<?php echo base_url();?>index2.html"><b>Sistem Pendukung Keputusan</b>Metode Promethee</a>
   </div>
@@ -48,8 +48,8 @@
       <p class="login-box-msg">Silahkan Masuk Menggunakan Akun Anda</p>
       <form action="<?php echo base_url();?>Home/proses" method="post">
         <div class="form-group has-feedback">
+					<span class="fa fa-envelope form-control-feedback"></span>
           <input type="email" name="email" class="form-control" placeholder="Email">
-          <span class="fa fa-envelope form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
           <input type="password" name="password" class="form-control" placeholder="Password">
@@ -58,7 +58,6 @@
         <div class="row">
           <div class="col-8">
               <p class="mb-0">
-        <a href="#" data-toggle="modal" data-target="#modal-default">Register a new membership</a>
       </p>
           </div>
           <!-- /.col -->

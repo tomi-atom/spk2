@@ -30,10 +30,10 @@
                             <form action="<?php echo base_url();?>Admin/Home/proses_input_npsikotes" method="post">
                               <div class="col-6">
                                        <div class="form-group">
-                                            <label for="kelas">Pilih Siswa</label>
-                                            <select class="form-control show-tick" name="siswa" id="siswa">
-                                                        <option value="">-- PILIH SISWA --</option>
-                                                        <?php foreach ($siswa as $key) {?>
+                                            <label for="kelas">Pilih Mahasiswa</label>
+                                            <select class="form-control show-tick" name="mahasiswa" id="mahasiswa">
+                                                        <option value="">-- PILIH Mahasiswa --</option>
+                                                        <?php foreach ($mahasiswa as $key) {?>
                                                             <option value="<?php echo $key['id'];?>|<?php echo $key['nama'];?>|<?php echo $key['id_siswa'];?>"><?php echo $key['nama'];?></option>
                                                         <?php } ?>
                                             </select>

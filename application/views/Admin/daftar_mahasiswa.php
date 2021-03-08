@@ -37,7 +37,7 @@
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>Jurusan</th>
-                                    <th>Jenis Kelamin</th>
+                                 
                                     <th>Actions</th>
                                 </tr>
                               </thead>
@@ -55,7 +55,7 @@
                                     <input type="hidden" name="" id="nama_mahasiswa<?= $p['id_mahasiswa']?>" value="<?php echo $p['nama']; ?>" >
                                     <td><?php echo $p['email']; ?></td>
                                     <td><?php echo $p['NamaJurusan']; ?></td>
-                                    <td><?php echo $p['jenis_kelamin']; ?></td>
+                                   
                                     <td>
                                         <a href="<?php echo base_url('Admin/Home/edit_mahasiswa/'.$p['id_mahasiswa']); ?>" class="btn btn-info btn-xs">Edit</a> 
                                         <a href="<?php echo site_url('Admin/Home/hapus_mahasiswa/'.$p['id_mahasiswa']); ?>" class="btn btn-danger btn-xs">Delete</a>

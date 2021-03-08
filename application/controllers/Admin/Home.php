@@ -67,7 +67,7 @@
 		public function index()
 		{
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['content']		=	'Admin/home';
@@ -207,7 +207,7 @@
 		public function daftar_guru()
 		{
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['guru']			=	$this->Data_model->data_guru();
@@ -218,7 +218,7 @@
 		public function tambah_guru()
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['guru']			=	$this->Data_model->daftar_guru();
@@ -238,7 +238,7 @@
 		public function edit_guru($id)
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['user']			= $this->Data_model->guru($id);
@@ -294,7 +294,7 @@
 		public function edit_siswa($id)
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['mahasiswa']			= 	$this->Data_model->mahasiswa($id);
@@ -362,7 +362,7 @@
 		public function daftar_jurusan()
 		{
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['jurusan']			=	$this->Data_model->daftar_jurusan();
@@ -373,7 +373,7 @@
 		public function tambah_jurusan()
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['content']		=	'Admin/tambah_jurusan';
@@ -383,7 +383,7 @@
 		public function edit_jurusan($id)
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['jurusan']			= 	$this->Data_model->data_jurusan($id);
@@ -461,7 +461,7 @@
 		public function daftar_mahasiswa()
 		{
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['mahasiswa']			=	$this->Data_model->daftar_mahasiswa();
@@ -473,7 +473,7 @@
 		public function tambah_mahasiswa()
 		{	
 			$this->checklogin();
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['mahasiswa']			=	$this->Data_model->data_siswa();
@@ -671,7 +671,7 @@
 		public function daftar_nilai()
         {
             $this->checklogin();
-            $data['tittle']         =   "Seleksi Jurusan";
+            $data['tittle']         =   "Seleksi Beasiswa";
             $id_pengguna            =   $this->session->userdata('id');
             $data['pengguna']       =   $this->Data_model->data_pengguna($id_pengguna);
             $data['peserta']        =   $this->Data_model->daftar_mahasiswa();
@@ -769,7 +769,7 @@
 
 		function input_nilaipsikotes()
 		{		
-			$data['tittle']			=	"SPK Seleksi Jurusan Unggulan";
+			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
 			$data['mahasiswa']			=	$this->Data_model->get_data_siswa_belum_nilai(4);
@@ -789,7 +789,7 @@
 
 		public function nilaipsikotes()
         {
-            $data['tittle']         =   "Seleksi Jurusan";
+            $data['tittle']         =   "Seleksi Beasiswa";
             $id_pengguna            =   $this->session->userdata('id');
             $data['pengguna']       =   $this->Data_model->data_pengguna($id_pengguna);
 			$data['mahasiswa']			=	$this->Data_model->read_nilai_psikotest();

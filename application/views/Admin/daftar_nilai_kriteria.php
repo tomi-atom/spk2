@@ -79,7 +79,7 @@
           <div class="modal-dialog">
             <div class="modal-content"  style="width: 600px">
               <div class="modal-header">
-                <h4 class="modal-title" id="view_nama_siswa">Nama Siswa</h4>
+                <h4 class="modal-title" id="view_nama_siswa">Nama Mahasiswa</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
               </div>
@@ -93,7 +93,7 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="fa fa-text-width"></i>
-                  Deskripsi Siswa
+                  Deskripsi Mahasiswa
                 </h3>
               </div>
               <!-- /.card-header -->
@@ -101,7 +101,7 @@
                 <dl>
                   <dt>Email</dt>
                   <dd id="view_email" ></dd>
-                  <dt>Siswa Kelas</dt>
+                  <dt>Mahasiswa Jurusan</dt>
                   <dd id="view_kelas"></dd>
                   <dt>Jenis Kelamin</dt>
                   <dd id="view_jk"></dd>
@@ -143,11 +143,11 @@
                 data = JSON.parse(data);
                 console.log(data);
                  clear_view(data);
-                $("#view_nama_siswa").text(data.data_siswa[0].nama);
-                $("#view_email").text(data.data_siswa[0].email);
-                $("#view_jk").text(data.data_siswa[0].jenis_kelamin);
-                $("#view_kelas").text(data.data_siswa[0].NamaKelas);
-                $("#view_kec").text(data.data_siswa[0].kecamatan);
+                $("#view_nama_siswa").text(data.data_mahasiswa[0].nama);
+                $("#view_email").text(data.data_mahasiswa[0].email);
+                $("#view_jk").text(data.data_mahasiswa[0].jenis_kelamin);
+                $("#view_kelas").text(data.data_mahasiswa[0].NamaKelas);
+                $("#view_kec").text(data.data_mahasiswa[0].kecamatan);
                 for(let j=0;j<data.data_kriteria.length;j++){
                    $("#kriteria"+data.data_kriteria[j].id_kriteria).text(data.data_kriteria[j].value);
                 }
