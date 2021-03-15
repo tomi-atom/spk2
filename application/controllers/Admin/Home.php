@@ -291,7 +291,7 @@
 		}
 
 
-		public function edit_siswa($id)
+		public function edit_mahasiswa($id)
 		{	
 			$this->checklogin();
 			$data['tittle']			=	"SPK Seleksi Beasiswa";
@@ -300,11 +300,11 @@
 			$data['mahasiswa']			= 	$this->Data_model->mahasiswa($id);
 			$data['guru']			=	$this->Data_model->daftar_guru();
 			$data['jurusan']			=	$this->Data_model->daftar_jurusan();
-			$data['content']		=	'Admin/edit_siswa';
+			$data['content']		=	'Admin/edit_mahasiswa';
 			$this->load->view('Admin/template',$data);
 		}
 
-		public function proses_tambah_siswa()
+		public function proses_tambah_mahasiswa()
 		{
 			$this->checklogin();
 				$result = $this->input->post('id');
@@ -325,13 +325,13 @@
             	echo validation_errors();
         	}
         	else{
-            	$this->Data_model->insert_siswa($data);
+            	$this->Data_model->insert_mahasiswa($data);
             	echo "<script> alert('Data SIswa disimpan.');</script>";
             	redirect(base_url('Admin/Home/daftar_mahasiswa'), 'refresh');
       		}
 		}
 
-		public function proses_update_siswa($ids)
+		public function proses_update_mahasiswa($ids)
 		{
 			$this->checklogin();
 				$result = $this->input->post('id');
@@ -352,7 +352,7 @@
             	echo validation_errors();
         	}
         	else{
-            	$this->Data_model->update_siswa($data,$ids);
+            	$this->Data_model->update_mahasiswa($data,$ids);
             	echo "<script> alert('Data SIswa disimpan.');</script>";
             	redirect(base_url('Admin/Home/daftar_mahasiswa'), 'refresh');
       		}
@@ -476,9 +476,9 @@
 			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
-			$data['mahasiswa']			=	$this->Data_model->data_siswa();
+			$data['mahasiswa']			=	$this->Data_model->data_mahasiswa();
 			$data['jurusan']			=	$this->Data_model->daftar_jurusan();
-			$data['content']		=	'Admin/tambah_siswa';
+			$data['content']		=	'Admin/tambah_mahasiswa';
 			$this->load->view('Admin/template',$data);
 		}
 
@@ -567,10 +567,10 @@
         	redirect(base_url('Admin/Home/daftar_kriteria'), 'refresh');
 		}
 
-		public function hapus_siswa($id)
+		public function hapus_mahasiswa($id)
 		{
 			$this->checklogin();
-			$this->Data_model->hapus_siswa($id);
+			$this->Data_model->hapus_mahasiswa($id);
         	redirect(base_url('Admin/Home/daftar_mahasiswa'), 'refresh');
 		}
 		public function daftar_subkriteria()
@@ -628,6 +628,57 @@
 			$data['content']    = 'Admin/tambah_subkriteria';
         	$this->load->view('Admin/template',$data);
 		}
+
+		public function upload(){
+			$fileName = $this->input->post('file', TRUE);
+
+			$config['upload_path'] = './upload/';
+			$config['file_name'] = $fileName;
+			$config['allowed_types'] = 'xls|xlsx|csv|ods|ots';
+			$config['max_size'] = 10000;
+
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			if (!$this->upload->do_upload('file')) {
+				$error = array('error' => $this->upload->display_errors());
+				$this->session->set_flashdata('msg','Ada kesalah dalam upload');
+				redirect('Welcome');
+			} else {
+				$media = $this->upload->data();
+				$inputFileName = 'upload/'.$media['file_name'];
+
+				try {
+					$inputFileType = IOFactory::identify($inputFileName);
+					$objReader = IOFactory::createReader($inputFileType);
+					$objPHPExcel = $objReader->load($inputFileName);
+				} catch(Exception $e) {
+					die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+				}
+
+				$sheet = $objPHPExcel->getSheet(0);
+				$highestRow = $sheet->getHighestRow();
+				$highestColumn = $sheet->getHighestColumn();
+
+				for ($row = 2; $row <= $highestRow; $row++){
+					$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+						NULL,
+						TRUE,
+						FALSE);
+					$data = array(
+						"No"=> $rowData[0][0],
+						"NamaKaryawan"=> $rowData[0][1],
+						"Alamat"=> $rowData[0][2],
+						"Posisi"=> $rowData[0][3],
+						"Status"=> $rowData[0][4]
+					);
+					$this->db->insert("tbimport",$data);
+				}
+				$this->session->set_flashdata('msg','Berhasil upload ...!!');
+				redirect('Import');
+			}
+		}
+
 
 		public function proses_tambah_subkriteria()
 		{
@@ -757,11 +808,11 @@
 			$this->load->view('Admin/tes',$data);
 		}
 
-		public function read_detail_siswa(){
+		public function read_detail_mahasiswa(){
 			 $id = $_POST["id"];
 			 $data = array();
-			 $data["data_siswa"] = $this->Data_model->read_siswa_by($id);
-			 $data["data_kriteria"] = $this->Data_model->read_kriteria_by_id_siswa($id);
+			 $data["data_mahasiswa"] = $this->Data_model->read_mahasiswa_by($id);
+			 $data["data_kriteria"] = $this->Data_model->read_kriteria_by_id_mahasiswa($id);
 
 			 echo json_encode($data);
 		}
@@ -772,7 +823,7 @@
 			$data['tittle']			=	"SPK Seleksi Beasiswa";
 			$id_pengguna			=	$this->session->userdata('id');
 			$data['pengguna']		=	$this->Data_model->data_pengguna($id_pengguna);
-			$data['mahasiswa']			=	$this->Data_model->get_data_siswa_belum_nilai(4);
+			$data['mahasiswa']			=	$this->Data_model->get_data_mahasiswa_belum_nilai(4);
 			$data['content']		=	'Admin/input_nilaipsikotes';
 			$this->load->view('Admin/template',$data);
 		}
@@ -801,12 +852,12 @@
         	$hasil;
         	if($aksi == "simpan" || $aksi == "umumkan" || $aksi=="cetak"){
                $hasil = $_POST["rangking"];
-        	   $d_siswa = $this->Data_model->daftar_mahasiswa()->result_array();
+        	   $d_mahasiswa = $this->Data_model->daftar_mahasiswa()->result_array();
 	        	$i = 1;
 	        	foreach ($hasil as  $value) {
-	        		foreach ($d_siswa as $value_s) {
+	        		foreach ($d_mahasiswa as $value_s) {
 	        			if($value["nama"] == $value_s["nama"]){
-	        			  $hasil["A".$i]["id_siswa"] = $value_s["id_siswa"];
+	        			  $hasil["A".$i]["id_mahasiswa"] = $value_s["id_mahasiswa"];
 	                      break;
 	        			}
 	        		}
@@ -821,15 +872,15 @@
                 foreach ($hasil as $value) {
                    $data = array();
                    $data["status"] =  $value['status'];
-                   $this->Data_model->update_siswa($data,$value["id_siswa"]);
+                   $this->Data_model->update_mahasiswa($data,$value["id_mahasiswa"]);
                 }
                 echo "Pengunguman Berhasil disampaikan ke mahasiswa";
         	}else if($aksi == "tarik"){
-        		$d_siswa = $this->Data_model->daftar_mahasiswa()->result_array();
-        		foreach ($d_siswa as $value) {
+        		$d_mahasiswa = $this->Data_model->daftar_mahasiswa()->result_array();
+        		foreach ($d_mahasiswa as $value) {
         			$data = array();
         		  	$data["status"] = "Belom";
-                    $this->Data_model->update_siswa($data,$value["id_siswa"]);
+                    $this->Data_model->update_mahasiswa($data,$value["id_mahasiswa"]);
         		}
         		echo "Pengunguman Di tarik dari mahasiswa";
         	}else if($aksi == "cetak"){

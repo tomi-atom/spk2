@@ -35,7 +35,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Email</th>
+
                                     <th>Jurusan</th>
                                  
                                     <th>Actions</th>
@@ -53,7 +53,7 @@
                                     <td><?php echo $c; ?></td>
                                     <td><a id="mahasiswa<?= $p['id_mahasiswa']?>" href="#" data-toggle="modal" data-target="#modal-default"><?php echo $p['nama']; ?></a></td>
                                     <input type="hidden" name="" id="nama_mahasiswa<?= $p['id_mahasiswa']?>" value="<?php echo $p['nama']; ?>" >
-                                    <td><?php echo $p['email']; ?></td>
+
                                     <td><?php echo $p['NamaJurusan']; ?></td>
                                    
                                     <td>

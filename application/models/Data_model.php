@@ -269,10 +269,10 @@ class Data_model extends CI_Model{
     function daftar_mahasiswa()
     {
         $this->db->select('*');
-        $this->db->from('pengguna p');
-        $this->db->join('mahasiswa l','l.id=p.id');
+
+        $this->db->from('mahasiswa l');
         $this->db->join('jurusan k','l.id_jurusan=k.id_jurusan');
-        $this->db->where('p.id_leveling','2');
+
         $q  =   $this->db->get();
         return $q;
     }
@@ -280,10 +280,10 @@ class Data_model extends CI_Model{
     function daftar_mahasiswa_jurusan($jurusan)
     {
         $this->db->select('*');
-        $this->db->from('pengguna p');
-        $this->db->join('mahasiswa l','l.id=p.id');
+
+        $this->db->from('mahasiswa l');
         $this->db->join('jurusan k','l.id_jurusan=k.id_jurusan');
-        $this->db->where('p.id_leveling','2');
+
         $this->db->where('l.id_jurusan',$jurusan);
         $q  =   $this->db->get();
         return $q;
@@ -292,11 +292,11 @@ class Data_model extends CI_Model{
     function mahasiswa($id) //id di tabel mahasiswa
     {
         $this->db->select('*');
-        $this->db->from('mahasiswa');
-        $this->db->join('pengguna','mahasiswa.id=pengguna.id');
+        $this->db->from('mahasiswa l');
+
         $this->db->join('jurusan','jurusan.id_jurusan=mahasiswa.id_jurusan');
         $this->db->where('mahasiswa.id_mahasiswa',$id);
-        $this->db->where('pengguna.id_leveling','2');
+
         $q  =   $this->db->get();
         return $q;
     }
@@ -304,9 +304,9 @@ class Data_model extends CI_Model{
     function get_data_mahasiswa($id){
         $this->db->select('*');
         $this->db->from('mahasiswa');
-        $this->db->join('pengguna','mahasiswa.id=pengguna.id');
+
         $this->db->where('mahasiswa.id_mahasiswa',$id);
-        $this->db->where('pengguna.id_leveling','2');
+
         $q  =   $this->db->get()->result_array();
         return $q;
     }
@@ -324,8 +324,7 @@ class Data_model extends CI_Model{
     function get_id_mahasiswa_by($id_pengguna){
         $this->db->select('id_mahasiswa');
         $this->db->from('mahasiswa');
-        $this->db->join('pengguna','mahasiswa.id=pengguna.id');
-        $this->db->where('pengguna.id',$id_pengguna);
+
         $q  =   $this->db->get()->row()->id_mahasiswa;
         return $q;
     }
@@ -337,7 +336,7 @@ class Data_model extends CI_Model{
 
     function data_mahasiswa()
     {
-        $query = $this->db->query("select * from pengguna p join leveling l on(p.id_leveling=l.id_leveling) where p.id_leveling = '2' AND  p.id NOT IN (Select id from mahasiswa)");
+        $query = $this->db->query("select * from mahasiswa");
         return $query;
     }
 
@@ -654,7 +653,7 @@ class Data_model extends CI_Model{
     public function read_mahamahasiswa_by($id_mahasiswa=""){
         $this->db->select('*');
         $this->db->from('mahasiswa a');
-        $this->db->join('pengguna b','a.id=b.id');
+
          $this->db->join('jurusan c','a.id_jurusan=c.id_jurusan');
          if($id_mahasiswa != ""){
            $this->db->where('a.id_mahasiswa = '.$id_mahasiswa); 
